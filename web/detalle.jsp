@@ -22,7 +22,7 @@
         <nav>
             <div class="nav-wrapper grey lighten-1">
                 <a href="#" class="brand-logo">
-                    Bienvenido <%=user.getNombre()%><%= user.getApellido() %>
+                    Bienvenido <%=user.getNombre()%><%= user.getApellido()%>
                 </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="productos.jsp">Productos</a></li>
@@ -35,32 +35,31 @@
             //RESCATAR PARAMETRO ENVIADO POR PRODUCTOS
             String codigo = request.getParameter("codigo");
             //OBTENER LISTA PARA BUSCAR PRODUCTO
-            ArrayList<Producto> lista = (ArrayList<Producto>)
-                       getServletContext().getAttribute("listaproducto");
+            ArrayList<Producto> lista = (ArrayList<Producto>) getServletContext().getAttribute("listaproducto");
 
             //BUSCAR EL PRODUCTO
             Producto producto = null;
             for (Producto p : lista) {
                 if (p.getCodigo() == Integer.parseInt(codigo)) {
-                           producto = p;
-                           break;
+                    producto = p;
+                    break;
                 }
             }
-           
+
         %>    
         <div class="row">
             <div class="col s4"></div>
             <div class="col s4">
                 <form action="add.do" method="post">
                     Codigo
-                    <input readonly="true" type="text" name="codigo" value="<%= producto.getCodigo() %>">
+                    <input readonly="true" type="text" name="codigo" value="<%= producto.getCodigo()%>">
                     Nombre
                     <input readonly="true" type="text" name="nombre" value="<%= producto.getNombre()%>">   
                     Precio
                     <input readonly="true" type="text" name="precio" value="<%= producto.getPrecio()%>">
                     Cantidad
                     <select name="cantidad">
-                        <% for(int i=1; i<= producto.getStock(); i++){ %>
+                        <% for (int i = 1; i <= producto.getStock(); i++) {%>
                         <option><%=i%></option>
                         <% } %>
                     </select>
@@ -72,15 +71,21 @@
                 </form>
             </div>
         </div>
-                
-                
-        <% }else{%>
-            No tienes permisos para acceder...<br>
-            <a href="index.jsp">Home</a>
-        <% } %>
+
+
+        <% } else {%>
+        No tienes permisos para acceder...<br>
+        <a href="index.jsp">Home</a>
+        <% }%>
 
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('select').material_select();
+            });
+
+        </script>
     </body>
 </html>
