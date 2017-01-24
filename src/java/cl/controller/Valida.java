@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,11 @@ public class Valida extends HttpServlet {
         }
         //VALIDAR
         if (user != null) {
+            //CREAR COOKIE
+            Cookie cookie=new Cookie("rut",rut);
+            cookie.setMaxAge(60*10);
+            cookie.setPath("/");
+            response.addCookie(cookie);
             //CREAR SESION y REDIRECCIONAR A MENU
             request.getSession().setAttribute("user", user);
             response.sendRedirect("menu.jsp");

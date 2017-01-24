@@ -13,6 +13,18 @@
 
     <body >
         <!-- Contenido-->
+        <%
+            String rut="";
+            Cookie[]cookies=request.getCookies();
+            for (Cookie item : cookies) {
+                if (item.getName().equals("rut")) {
+                    rut = item.getValue();
+                }
+            }
+        %>
+        
+        
+        
         <div class="row">
             <div class="col s4">
             </div>
@@ -20,7 +32,7 @@
                 <form action="validar.do" method="POST">
                     <div class="input-field">
                         <label for="rut">Rut</label>
-                        <input type="text" name="rut" id="rut"/>
+                        <input value="<%=rut%>" type="text" name="rut" id="rut"/>
                     </div>
                     <div class="input-field">
                         <label for="pass">Clave</label>
